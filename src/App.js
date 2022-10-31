@@ -6,6 +6,13 @@ import './App.css';
 
 function App() {
 
+
+  let deferredPrompt;
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+      deferredPrompt = e;
+  });
+
   const [textInput, setTextInput] = useState()
 
   const [todos, setTodos] = useState([""]);
@@ -29,6 +36,16 @@ function App() {
     console.log("delete")
   }
 
+  const handlePWAprompt = async () => {
+    if (deferredPrompt !== null) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+          deferredPrompt = null;
+      }
+  }
+}
+
   return (
     <div className="App">
       <div style={{display: "flex", flexDirection:"column", alignItems:"center"}}>
@@ -36,6 +53,7 @@ function App() {
           <div style={{display: "flex", gap:"20px"}}>
             <div>{todo}</div>
             <button onClick={handleDeleteTodo}>❌</button>
+            <button onClick={handlePWAprompt}>ADD PWA 🤩🤩🤩</button>
           </div> 
         ))}
       </div>
