@@ -18,8 +18,9 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "https://ilodi2k.github.io/pwatest/",
   "display": "standalone",
   "theme_color": "#000000",
+  "scope": "https://ilodi2k.github.io/pwatest/",
   "background_color": "#ffffff"
 }
